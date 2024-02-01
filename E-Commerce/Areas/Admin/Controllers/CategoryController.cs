@@ -1,22 +1,24 @@
 ﻿using ECommerce.DataAccess.Data;
+using ECommerce.DataAccess.Repository.IRepository;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace E_Commerce.Controllers
+namespace E_Commerce.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryController(ICategoryRepository db)
         {
-            _db = db;
+            _categoryRepository = db;
         }
         public IActionResult Index()
         {
-            List<Category> getAllCategories = _db.Categories.ToList();
+            List<Category> getAllCategories = _categoryRepository.GetAll().ToList();
             return View(getAllCategories);
         }
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }
@@ -27,17 +29,19 @@ namespace E_Commerce.Controllers
             {
                 ModelState.AddModelError("name", "The DisplayOrder cannot exactly match the Name.");
             }
-            if (ModelState.IsValid) {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _categoryRepository.Add(obj);
+                _categoryRepository.Save();
                 TempData["success"] = $"Category {obj.Name} Is Created Successfully";
-                return RedirectToAction("Index","Category");
+                return RedirectToAction("Index", "Category");
             }
             return View();
         }
         public IActionResult Edit(int? id)
         {
-            Category? categoryFromDb = _db.Categories.FirstOrDefault(c => c.Id == id);
+            // Category? categoryFromDb = _db.Categories.FirstOrDefault(c => c.Id == id);
+            Category? categoryFromDb = _categoryRepository.Get(c => c.Id == id);
             if (id == null || id == 0 || categoryFromDb == null)
             {
                 return NotFound();
@@ -49,8 +53,8 @@ namespace E_Commerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _categoryRepository.Update(obj);
+                _categoryRepository.Save();
                 TempData["success"] = $"Category {obj.Name} Is Created Successfully";
                 return RedirectToAction("Index", "Category");
             }
@@ -62,8 +66,9 @@ namespace E_Commerce.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _db.Categories.Find(id);
-            if ( categoryFromDb == null)
+
+            Category? categoryFromDb = _categoryRepository.Get(c => c.Id == id);
+            if (categoryFromDb == null)
             {
                 return NotFound();
             }
@@ -72,13 +77,13 @@ namespace E_Commerce.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            Category? obj = _db.Categories.Find(id);
+            Category? obj = _categoryRepository.Get(c => c.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.Categories.Remove(obj);
-            _db.SaveChanges();
+            _categoryRepository.Remove(obj);
+            _categoryRepository.Save();
             TempData["success"] = $"Category {obj.Name} Is Deleted Successfully";
             return RedirectToAction("Index", "Category");
         }
