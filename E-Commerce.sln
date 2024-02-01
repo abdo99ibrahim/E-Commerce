@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-Commerce", "E-Commerce\E-Commerce.csproj", "{2E4F42F4-4C3B-4AB0-AFCE-6092DBBE3C23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-Commerce.Web", "E-Commerce\E-Commerce.Web.csproj", "{2E4F42F4-4C3B-4AB0-AFCE-6092DBBE3C23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerace.DataAccess", "ECommerace.DataAccess\ECommerace.DataAccess.csproj", "{6CF98D84-4DE4-47FB-8B12-55C60BC167E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.DataAccess", "ECommerace.DataAccess\ECommerce.DataAccess.csproj", "{6CF98D84-4DE4-47FB-8B12-55C60BC167E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerace.Models", "ECommerace.Models\ECommerace.Models.csproj", "{15FACA41-BA2F-49E0-BE7B-624EDB6E753E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.Models", "ECommerace.Models\ECommerce.Models.csproj", "{15FACA41-BA2F-49E0-BE7B-624EDB6E753E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerace.Utility", "ECommerace.Utility\ECommerace.Utility.csproj", "{A38BB2CA-DB10-41BF-A79C-154885220962}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.Utility", "ECommerace.Utility\ECommerce.Utility.csproj", "{A38BB2CA-DB10-41BF-A79C-154885220962}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

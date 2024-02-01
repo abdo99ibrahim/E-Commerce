@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace E_Commerce.Migrations
+namespace ECommerce.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class ChangeDisplayNameColumnInCategoryTable : Migration

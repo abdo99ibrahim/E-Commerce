@@ -1,8 +1,8 @@
-using E_Commerce.Models;
+using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace E_Commerce.Controllers
+namespace ECommerce.DataAccess.Controllers
 {
     public class HomeController : Controller
     {
