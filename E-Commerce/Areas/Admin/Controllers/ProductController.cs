@@ -3,7 +3,6 @@ using ECommerce.Models;
 using ECommerce.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace E_Commerce.Areas.Admin.Controllers
 {
@@ -61,13 +60,13 @@ namespace E_Commerce.Areas.Admin.Controllers
 
                     if (!string.IsNullOrEmpty(productVm.Product.ImageUrl))
                     {
-                        var oldImagePath = Path.Combine(RootPath,productVm.Product.ImageUrl.TrimStart('\\'));
+                        var oldImagePath = Path.Combine(RootPath, productVm.Product.ImageUrl.TrimStart('\\'));
                         if (System.IO.File.Exists(oldImagePath))
                         {
                             System.IO.File.Delete(oldImagePath);
                         }
                     }
-                    using (var fileStream = new FileStream(Path.Combine(productPath,fileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
                     }
@@ -125,15 +124,15 @@ namespace E_Commerce.Areas.Admin.Controllers
         }
 
         #region API CALLS
-            [HttpGet]
-            public IActionResult GetAll()
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Product> getAllProducts = _productRepository.GetAll(includeProperties: "Category").ToList();
+            return Json(new
             {
-                List<Product> getAllProducts = _productRepository.GetAll(includeProperties: "Category").ToList();
-                return Json(new
-                {
-                    data = getAllProducts
-                });
-            }
+                data = getAllProducts
+            });
+        }
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
